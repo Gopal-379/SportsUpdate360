@@ -10,7 +10,7 @@ const NavBar = () => {
     const [enabled, setEnabled] = useState(theme === 'dark');
 
     const userDataString = localStorage.getItem("userData");
-    const userData: User = JSON.parse(userDataString ? userDataString : "");
+    const userData: User = JSON.parse(userDataString ? userDataString : "{}");
 
     const toggleTheme = () => {
         let newTheme = ''
