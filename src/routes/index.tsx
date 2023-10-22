@@ -5,6 +5,8 @@ import SignPage from "../pages/authentication";
 import ProtectedRoute from "./ProtectedRoute";
 import Signout from "../pages/authentication/Signout";
 import Home from "../pages/home";
+import MatchDetailsModal from "../pages/match";
+import ArticleDetailsModel from "../pages/article";
 
 const router = createBrowserRouter([
     {
@@ -19,7 +21,33 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <></>,
-            }
+            },
+            {
+                path: "match",
+                children: [
+                    {
+                        index: true,
+                        element: <Navigate to="/" replace />
+                    },
+                    {
+                        path: ":matchId",
+                        element: <MatchDetailsModal />,
+                    },
+                ],
+            },
+            {
+                path: "article",
+                children: [
+                    {
+                        index: true,
+                        element: <Navigate to="/" replace />
+                    },
+                    {
+                        path: ":articleId",
+                        element: <ArticleDetailsModel />,
+                    },
+                ],
+            },
         ],
     },
     {

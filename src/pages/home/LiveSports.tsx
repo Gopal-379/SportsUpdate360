@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CalendarDaysIcon, MapPinIcon } from "@heroicons/react/20/solid";
-import { useMatchState } from "../context/matches/context"
-import { Match } from "../types/types";
+import { useMatchState } from "../../context/matches/context"
+import { Match } from "../../types/types";
+import { Link } from "react-router-dom";
 
 const LiveSports = () => {
     const state: any = useMatchState();
@@ -9,30 +10,39 @@ const LiveSports = () => {
 
     return (
         <div>
-            <p className="font-bold text-xl mb-4">Live Sports</p>
+            <p className="font-bold text-2xl mb-4 text-white">Live Sports</p>
             {isError && <p className="text-red-500">{errMsg}</p>}
             {isLoading && (
-                <div className="flex overflow-x-auto gap-2 p-1">
-                    {[...Array(15).keys()].map((id) => (
+                <div className="flex items-center justify-center overflow-x-auto gap-2 pb-1 rounded-l-md">
+                    {isLoading && 
+                        [...Array(4).keys()].map((id) => (
                         <div
                             key={id}
-                            className="flex-shrink-0 bg-slate-200 p-3 rounded-md outline-blue-300 h-28 w-60 animate-pulse"
+                            className="flex-shrink-0 bg-white p-5 rounded-md shadow-md h-28 w-80"
                         />
                     ))}
                 </div>
             )}
             <div className="flex overflow-x-auto gap-2 p-2 -mr-8">
                 {matches && matches.reverse().map((match: Match) => (
-                    <div
+                    <Link
+                        to={`/match/${match.id}`}
                         key={match.id}
-                        className={`flex-shrink-0 bg-gray-200 p-3 rounded-md outline-blue-300 ${match.isRunning && "outline"}`}
+                        className="flex-shrink-0 bg-white p-3 rounded-md text-black"
                     >
                         <div className="flex justify-between items-center mb-3 gap-6">
                             <p className="text-sm">{match.sportName}</p>
-                            <div className="flex items-center text-sm text-gray-500 gap-1">
-                                <CalendarDaysIcon className="w-4 h-4" />
-                                <p>{new Date(match.endsAt).toDateString()}</p>
-                            </div>
+                            {match.isRunning ? (
+                                <div className="flex items-center gap-1">
+                                    <span className="p-1 rounded-full bg-sky-700 animate-pulse" />
+                                    <p className="text-sky-700 text-sm">Live Now</p>
+                                </div>
+                            ) : (
+                                <div className="flex items-center text-sm text-gray-500 gap-1">
+                                    <CalendarDaysIcon className="w-4 h-4" />
+                                    <p>{new Date(match.endsAt).toDateString()}</p>
+                                </div>    
+                            )}
                         </div>
                         <div className="flex mt-2 items-center font-semibold gap-2">
                             <span>{match.teams[0].name}</span>
@@ -43,7 +53,7 @@ const LiveSports = () => {
                             <MapPinIcon className="w-4 h-4" />
                             <p>{match.location}</p>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>

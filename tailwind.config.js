@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backdropBlur: {
+        'lg': '16px',
+      },
+    },
   },
   plugins: [],
   darkMode: "class",
