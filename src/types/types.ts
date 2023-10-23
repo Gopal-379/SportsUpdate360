@@ -10,6 +10,11 @@ export type Teams = {
     name: string;
 }
 
+export type Sport = {
+    id: number;
+    name: string;
+}
+
 export type Match = {
     id: number;
     endsAt: string;
@@ -59,9 +64,4 @@ export type ArticleDetails = {
     date: string;
     content: string;
     teams: Teams[];
-}
-
-export type Sport = {
-    id: number;
-    name: string;
 }

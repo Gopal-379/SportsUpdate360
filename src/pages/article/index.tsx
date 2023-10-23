@@ -57,26 +57,28 @@ const ArticleDetailsModel = () => {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-green-600 text-white p-6 text-left align-middle shadow-xl transition-all dark:bg-stone-950">
+                                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-slate-300 text-white p-6 text-left align-middle shadow-xl transition-all">
                                     <Dialog.Title
                                         as="h3"
-                                        className="text-2xl font-bold leading-6 text-white"
+                                        className="text-2xl font-bold leading-6 text-black"
                                     >
                                         {article?.title}
                                     </Dialog.Title>
-                                    <p className="mb-4 mt-4 text-sm">{article?.summary}</p>
+                                    <p className="mb-4 mt-4 text-sm text-black">{article?.summary}</p>
                                     <div className="flex justify-between items-center mt-1 mb-3 gap-6">
-                                        <p className="text-sm">{article?.sport.name}</p>
-                                        <div className="flex items-center text-sm gap-1">
+                                        <p className="text-sm text-black">{article?.sport.name}</p>
+                                        <div className="flex items-center text-sm gap-1 text-black">
                                             <CalendarDaysIcon className="w-4 h-4" />
                                             <p>
                                                 {article?.date && new Date(article.date).toDateString()}
                                             </p>
                                         </div>
                                     </div>
-                                    <div className="mt-4 bg-white -m-6 p-6 text-black">
+                                    <div className="mt-4 bg-slate-300 -m-6 p-6 text-black">
                                         <p className="font-bold text-lg">Story</p>
-                                        <p>{article?.content}</p>
+                                        <div className="text-justify">
+                                            <p>{article?.content}</p>
+                                        </div>
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>

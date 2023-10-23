@@ -10,7 +10,7 @@ const LiveSports = () => {
 
     return (
         <div>
-            <p className="font-bold text-2xl mb-4 text-white">Live Sports</p>
+            <p className="font-bold text-2xl mb-4 text-black dark:text-white">Live Sports</p>
             {isError && <p className="text-red-500">{errMsg}</p>}
             {isLoading && (
                 <div className="flex items-center justify-center overflow-x-auto gap-2 pb-1 rounded-l-md">

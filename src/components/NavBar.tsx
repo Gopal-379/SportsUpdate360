@@ -25,13 +25,13 @@ const NavBar = () => {
     
     return (
         <>
-            <Disclosure as="nav" className="sticky top-0 z-10 bg-green-600 text-white backdrop-blur-lg dark:bg-black">
+            <Disclosure as="nav" className="sticky top-0 z-10 bg-slate-300 text-black backdrop-blur-lg dark:bg-black">
                 {() => (
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 items-center justify-between">
                         <div className="flex items-center">
                             <div className="flex-shrink-0">
-                            <span className="text-3xl font-bold">
+                            <span className="text-3xl font-bold dark:text-white">
                                 SportsUpdate360
                             </span>
                             </div>
@@ -39,7 +39,7 @@ const NavBar = () => {
                         <div className="flex ml-4 items-center md:ml-6">
                             <Menu as="div" className="relative ml-3">
                             <div>
-                                <Menu.Button className="rounded-full p-1 text-white transition-colors">
+                                <Menu.Button className="rounded-full p-1 text-black transition-colors dark:text-white">
                                     <UserCircleIcon className="h-8 w-8" aria-hidden="true" />
                                 </Menu.Button>
                             </div>
