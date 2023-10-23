@@ -26,7 +26,7 @@ const LiveNews = () => {
                             to={`/article/${article.id}`}
                             className="flex rounded-lg bg-white border border-gray-200 shadow-md hover:shadow-xl transition-shadow dark:bg-neutral-700">
                             <img
-                                className="w-32 rounded-l-lg object-cover h-auto"
+                                className="w-32 rounded-lg object-cover"
                                 src={article.thumbnail}
                                 alt="thumbnail"
                             />

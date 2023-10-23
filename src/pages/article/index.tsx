@@ -64,14 +64,14 @@ const ArticleDetailsModel = () => {
                                     >
                                         {article?.title}
                                     </Dialog.Title>
-                                    <p className="mb-4 text-sm">{article?.summary}</p>
-                                    <div className="flex justify-between items-center mt-1 mb-3 gap-6 ">
+                                    <p className="mb-4 mt-4 text-sm">{article?.summary}</p>
+                                    <div className="flex justify-between items-center mt-1 mb-3 gap-6">
                                         <p className="text-sm">{article?.sport.name}</p>
                                         <div className="flex items-center text-sm gap-1">
-                                        <CalendarDaysIcon className="w-4 h-4" />
-                                        <p>
-                                            {article?.date && new Date(article.date).toDateString()}
-                                        </p>
+                                            <CalendarDaysIcon className="w-4 h-4" />
+                                            <p>
+                                                {article?.date && new Date(article.date).toDateString()}
+                                            </p>
                                         </div>
                                     </div>
                                     <div className="mt-4 bg-white -m-6 p-6 text-black">
