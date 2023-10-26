@@ -1,14 +1,17 @@
+/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "react-router-dom";
 import { useArticleState } from "../../context/articles/context";
-import { Article, Sport } from "../../types/types";
+import { Article, Sport, Teams } from "../../types/types";
 import { useSportState } from "../../context/sports/context";
 import { useState } from "react";
+import { useTeamState } from "../../context/teams/context";
 
 const LiveNews = () => {
     const articleState: any = useArticleState();
     const sportState: any = useSportState();
+    const teamState: any = useTeamState();
     const {
         articles,
         isLoading: articleLoading,
@@ -20,6 +23,11 @@ const LiveNews = () => {
         isError: sportError,
         errMsg: sportErrorMessage,
     } = sportState;
+    const {
+        team,
+        isError: teamError,
+        errMsg: teamErrorMessage,
+    } = teamState;
 
     const [selectedSports, setSelectedSports] = useState<number[]>([]);
     const [selectedSportDropdown, setSelectedSportDropdown] = useState("All");
@@ -31,6 +39,25 @@ const LiveNews = () => {
         } else {
             setSelectedSports([parseInt(event.target.value, 10)]);
         }
+    };
+    
+    const [selectedTeams, setSelectedTeams] = useState<number[]>([]);
+
+    const toggleTeam = (team: number) => {
+        if (selectedTeams.includes(team)) {
+            setSelectedTeams((selectedTeams) =>
+            selectedTeams.filter((selectedTeams) => selectedTeams !== team)
+        );
+        } else {
+            setSelectedTeams((selectedTeams) => [...selectedTeams, team]);
+        }
+    };
+
+    const findSportId = (sportName: string) => {
+        const sportId: Sport = sports.find(
+            (sport: Sport) => sport.name === sportName
+        );
+        return sportId ? sportId.id : -1;
     };
 
     return (
@@ -53,10 +80,40 @@ const LiveNews = () => {
                     </select>
                 </div>
             </div>
+            <div className="mb-4 scroll-bar">
+                <p className="text-md font-semibold mb-1">Filter by team:</p>
+                <div className="flex gap-2 items-center mb-3 overflow-x-auto">
+                    {team
+                        .filter(
+                            (team: Teams) => 
+                                selectedSports.length === 0 || selectedSports.includes(findSportId(team.plays ? team.plays : ""))
+                        )
+                        .map((team: Teams) =>
+                    selectedTeams.includes(team.id) ? (
+                    <div
+                        onClick={() => toggleTeam(team.id)}
+                        className="flex-shrink-0 cursor-pointer flex items-center gap-1 bg-black rounded-lg px-2 py-1 text-white text-sm dark:bg-white dark:text-neutral-700 mb-3"
+                    >
+                        <span className="bg-white rounded-full p-1.5 dark:bg-black" />
+                        <span>{team.name}</span>
+                    </div>
+                    ) : (
+                    <div
+                        onClick={() => toggleTeam(team.id)}
+                        className="flex-shrink-0 cursor-pointer flex items-center gap-1 border border-black rounded-lg px-2 py-1 text-neutral-700 text-sm dark:text-white dark:border-white mb-3"
+                    >
+                        <span className="bg-stone-700 rounded-full p-1.5 dark:bg-white" />
+                        <span>{team.name}</span>
+                    </div>
+                    )
+                )}
+                </div>
+            </div>
             {articleError && (
                 <p className="text-red-500">{articleErrorMessage}</p>
             )}
             {sportError && <p className="text-red-500">{sportErrorMessage}</p>}
+            {teamError && <p className="text-red-500">{teamErrorMessage}</p>}
             <div className="flex flex-col md:grid-cols-2 sm:grid-cols-1 gap-2 rounded-md">
                 {articleLoading &&
                 [...Array(10).keys()].map((id) => (
@@ -69,8 +126,19 @@ const LiveNews = () => {
                     articles
                     .filter(
                         (article: Article) => 
-                            selectedSports.length === 0 ||
-                            selectedSports.includes(article.sport.id)
+                            selectedSports.length === 0 || selectedSports.includes(article.sport.id)
+                    )
+                    .filter(
+                        (article: Article) => {
+                            let flag = false;
+                            for (let t of article.teams) {
+                                if (selectedTeams.includes(t.id)) {
+                                    flag = true;
+                                    break;
+                                }
+                            }
+                            return selectedTeams.length === 0 || flag;
+                        }
                     )
                     .map((article: Article) => (
                     <Link

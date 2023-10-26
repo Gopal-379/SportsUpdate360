@@ -8,6 +8,7 @@ export type User = {
 export type Teams = {
     id: number;
     name: string;
+    plays?: string;
 }
 
 export type Sport = {

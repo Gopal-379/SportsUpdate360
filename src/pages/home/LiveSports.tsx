@@ -9,13 +9,13 @@ const LiveSports = () => {
     const { matches, isLoading, isError, errMsg } = state;
 
     return (
-        <div>
+        <div className="scroll-bar">
             <p className="font-bold text-2xl mb-4 text-black dark:text-white">Live Sports</p>
             {isError && <p className="text-red-500">{errMsg}</p>}
             {isLoading && (
                 <div className="flex items-center justify-center overflow-x-auto gap-2 pb-1 rounded-l-md">
                     {isLoading && 
-                        [...Array(4).keys()].map((id) => (
+                        [...Array(10).keys()].map((id) => (
                         <div
                             key={id}
                             className="flex-shrink-0 bg-white p-5 rounded-md shadow-md h-28 w-80"
