@@ -9,7 +9,7 @@ export interface MatchState {
 
 export type MatchActions =
     | { type: "FETCH_MATCH_REQUEST" }
-    | { type: "FTECH_MATCH_SUCCESS"; payload: Match[] }
+    | { type: "FETCH_MATCH_SUCCESS"; payload: Match[] }
     | { type: "FETCH_MATCH_ERROR"; payload: string };
 
 export const initialState: MatchState = {
@@ -29,7 +29,7 @@ export const matchReducer = (
                 ...state,
                 isLoading: true,
             };
-        case "FTECH_MATCH_SUCCESS":
+        case "FETCH_MATCH_SUCCESS":
             return {
                 ...state,
                 isLoading: false,

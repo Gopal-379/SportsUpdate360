@@ -2,8 +2,8 @@ import { User } from "../types/types";
 import { ThemeContext } from "../context/theme"
 import { Fragment, useContext, useState } from "react";
 import { Disclosure, Menu, Switch, Transition } from "@headlessui/react";
-import { UserCircleIcon } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
+import { Cog6ToothIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 
 const NavBar = () => {
     const { theme, setTheme } = useContext(ThemeContext);
@@ -27,7 +27,7 @@ const NavBar = () => {
         <>
             <Disclosure as="nav" className="sticky top-0 z-10 bg-slate-300 text-black backdrop-blur-lg dark:bg-black">
                 {() => (
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div className="mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 items-center justify-between">
                         <div className="flex items-center">
                             <div className="flex-shrink-0">
@@ -37,6 +37,9 @@ const NavBar = () => {
                             </div>
                         </div>
                         <div className="flex ml-4 items-center md:ml-6">
+                            <Link to="/preferences">
+                                <Cog6ToothIcon className="h-6 w-6 dark:text-white"/>        
+                            </Link>    
                             <Menu as="div" className="relative ml-3">
                             <div>
                                 <Menu.Button className="rounded-full p-1 text-black transition-colors dark:text-white">

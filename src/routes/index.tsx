@@ -7,6 +7,7 @@ import Signout from "../pages/authentication/Signout";
 import Home from "../pages/home";
 import MatchDetailsModal from "../pages/match";
 import ArticleDetailsModel from "../pages/article";
+import Preferences from "../pages/preferences";
 
 const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
                         element: <ArticleDetailsModel />,
                     },
                 ],
+            },
+            {
+                path: "preferences",
+                element: <Preferences />,
             },
         ],
     },

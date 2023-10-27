@@ -62,12 +62,12 @@ const LiveNews = () => {
 
     return (
         <div>
-            <p className="font-bold text-2xl mb-3">Live News</p>
+            <p className="px-2 font-bold text-2xl mb-3">Live News</p>
             <div className="mb-4">
-                <p className="text-md font-semibold mb-1">Filter by sport:</p>
-                <div className="flex gap-2 items-center mb-3">
+                <p className="text-md font-semibold mb-1 px-2">Filter by sport:</p>
+                <div className="flex items-center space-x-2 mb-3 px-2">
                     <select
-                        className="px-4 py-2 border rounded-md bg-white text-gray-800 focus:outline-none focus:ring focus:border-blue-300"
+                        className="px-4 py-2 border rounded-md bg-white text-gray-800 focus:outline-none focus:ring focus:border-blue-300 dark:text-white dark:bg-black"
                         value={selectedSportDropdown}
                         onChange={handleSportDropdownChange}
                     >
@@ -81,32 +81,32 @@ const LiveNews = () => {
                 </div>
             </div>
             <div className="mb-4 scroll-bar">
-                <p className="text-md font-semibold mb-1">Filter by team:</p>
-                <div className="flex gap-2 items-center mb-3 overflow-x-auto">
+                <p className="text-md font-semibold mb-1 px-2">Filter by team:</p>
+                <div className="flex gap-2 items-center mb-3 overflow-x-auto px-2">
                     {team
                         .filter(
                             (team: Teams) => 
                                 selectedSports.length === 0 || selectedSports.includes(findSportId(team.plays ? team.plays : ""))
                         )
                         .map((team: Teams) =>
-                    selectedTeams.includes(team.id) ? (
-                    <div
-                        onClick={() => toggleTeam(team.id)}
-                        className="flex-shrink-0 cursor-pointer flex items-center gap-1 bg-black rounded-lg px-2 py-1 text-white text-sm dark:bg-white dark:text-neutral-700 mb-3"
-                    >
-                        <span className="bg-white rounded-full p-1.5 dark:bg-black" />
-                        <span>{team.name}</span>
-                    </div>
-                    ) : (
-                    <div
-                        onClick={() => toggleTeam(team.id)}
-                        className="flex-shrink-0 cursor-pointer flex items-center gap-1 border border-black rounded-lg px-2 py-1 text-neutral-700 text-sm dark:text-white dark:border-white mb-3"
-                    >
-                        <span className="bg-stone-700 rounded-full p-1.5 dark:bg-white" />
-                        <span>{team.name}</span>
-                    </div>
-                    )
-                )}
+                        selectedTeams.includes(team.id) ? (
+                        <div
+                            onClick={() => toggleTeam(team.id)}
+                            key={team.id}            
+                            className="flex-shrink-0 cursor-pointer flex items-center gap-1 bg-black rounded-lg px-2 py-1 text-white text-sm dark:bg-white dark:text-neutral-700 mb-3"
+                        >
+                            <span>{team.name}</span>
+                        </div>
+                        ) : (
+                            <div
+                                onClick={() => toggleTeam(team.id)}
+                                key={team.id}                
+                                className="flex-shrink-0 cursor-pointer flex items-center gap-1 border border-black rounded-lg px-2 py-1 text-neutral-700 text-sm dark:text-white dark:border-white mb-3"
+                            >
+                                <span>{team.name}</span>
+                            </div>
+                        )
+                    )}
                 </div>
             </div>
             {articleError && (
@@ -114,7 +114,7 @@ const LiveNews = () => {
             )}
             {sportError && <p className="text-red-500">{sportErrorMessage}</p>}
             {teamError && <p className="text-red-500">{teamErrorMessage}</p>}
-            <div className="flex flex-col md:grid-cols-2 sm:grid-cols-1 gap-2 rounded-md">
+            <div className="flex flex-col md:grid-cols-2 sm:grid-cols-1 gap-2 rounded-md px-2">
                 {articleLoading &&
                 [...Array(10).keys()].map((id) => (
                     <div
