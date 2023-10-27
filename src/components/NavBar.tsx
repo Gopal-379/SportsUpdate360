@@ -4,6 +4,7 @@ import { Fragment, useContext, useState } from "react";
 import { Disclosure, Menu, Switch, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import { Cog6ToothIcon, UserCircleIcon } from "@heroicons/react/24/outline";
+import { MoonIcon, SunIcon } from "@heroicons/react/20/solid";
 
 const NavBar = () => {
     const { theme, setTheme } = useContext(ThemeContext);
@@ -31,14 +32,40 @@ const NavBar = () => {
                     <div className="flex h-16 items-center justify-between">
                         <div className="flex items-center">
                             <div className="flex-shrink-0">
-                            <span className="text-3xl font-bold dark:text-white">
-                                SportsUpdate360
-                            </span>
+                                <span className="text-3xl font-bold dark:text-white">
+                                    SportsUpdate360
+                                </span>
                             </div>
                         </div>
                         <div className="flex ml-4 items-center md:ml-6">
+                            <Switch
+                                checked={enabled}
+                                onChange={toggleTheme}
+                                className={`${
+                                    enabled ? "bg-slate-400" : "bg-slate-700"
+                                }
+                                relative inline-flex h-[25px] w-[60px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
+                                >
+                                <span
+                                    aria-hidden="true"
+                                    className={`${
+                                    enabled ? "translate-x-9" : "translate-x-0"
+                                    }
+                                    pointer-events-none inline-block h-[22px] w-[22px] pl-1 pr-1 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
+                                    >
+                                        {enabled ? (
+                                            <div className="flex items-center gap-1">
+                                                <MoonIcon className="h-6 w-6" />
+                                            </div>
+                                        ) : (
+                                            <div className="flex items-center gap-1">
+                                                <SunIcon className="h-6 w-6" />
+                                            </div>
+                                        )}
+                                </span>
+                            </Switch>
                             <Link to="/preferences">
-                                <Cog6ToothIcon className="h-6 w-6 dark:text-white"/>        
+                                <Cog6ToothIcon className="h-6 w-6 dark:text-white ml-4"/>        
                             </Link>    
                             <Menu as="div" className="relative ml-3">
                             <div>
@@ -63,25 +90,6 @@ const NavBar = () => {
                                     <span className="text-sm text-gray-500">
                                         {userData.email}
                                     </span>
-                                </div>
-                                <div className="flex justify-between items-center py-2">
-                                                <span className="font-normal text-md text-black">Dark mode: {" "}</span>
-                                    <Switch
-                                    checked={enabled}
-                                    onChange={toggleTheme}
-                                    className={`${
-                                        enabled ? "bg-slate-400" : "bg-slate-700"
-                                    }
-                                    relative inline-flex h-[24px] w-[60px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
-                                    >
-                                    <span
-                                        aria-hidden="true"
-                                        className={`${
-                                        enabled ? "translate-x-9" : "translate-x-0"
-                                        }
-                                        pointer-events-none inline-block h-[20px] w-[20px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
-                                    />
-                                    </Switch>
                                 </div>
                                 <div className="text-center py-2">
                                     <Link
