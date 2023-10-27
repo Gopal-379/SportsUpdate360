@@ -34,8 +34,8 @@ const LiveCard = ({ matchID }: { matchID: number }) => {
                     <p className="text-sm dark:text-neutral-300">{match.sportName}</p>
                     {match.isRunning ? (
                         <div className="flex items-center gap-1">
-                            <span className="p-1 rounded-full bg-sky-700 animate-pulse dark:bg-neutral-300" />
-                            <p className="text-sky-700 text-sm dark:text-neutral-300">
+                            <span className="p-1 rounded-full bg-slate-600 animate-pulse dark:bg-white" />
+                            <p className="text-slate-600 text-sm dark:text-neutral-300">
                                 Live now
                             </p>
                         </div>
@@ -50,7 +50,7 @@ const LiveCard = ({ matchID }: { matchID: number }) => {
                     <div className="flex items-center gap-2">
                         <div
                             className={`${match?.playingTeam === match?.teams[0].id &&
-                                "text-sky-700 dark:text-sky-300"
+                                "text-green-700 dark:text-green-400"
                                 }`}
                         >
                             <span className="font-semibold">
