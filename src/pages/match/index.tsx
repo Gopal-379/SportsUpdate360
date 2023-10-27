@@ -62,38 +62,37 @@ const MatchDetailsModal = () => {
                         leaveFrom="opacity-100 scale-100"
                         leaveTo="opacity-0 scale-95"
                     >
-                        <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-xl bg-slate-300 text-black p-6 text-left align-middle shadow-xl transition-all">
+                        <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-xl bg-slate-300 text-black p-6 text-left align-middle shadow-xl transition-all dark:bg-black dark:border border-white">
                         <Dialog.Title
                             as="h3"
-                            className="text-2xl font-bold leading-6 text-black"
+                            className="text-2xl font-bold leading-6 text-black dark:text-neutral-200"
                         >
                             {match?.name}
                         </Dialog.Title>
-                        <div className="flex justify-between items-center mt-1 mb-3 gap-6">
+                        <div className="flex justify-between items-center mt-1 mb-3 gap-6 dark:text-neutral-200">
                             <p className="text-sm">{match?.sportName}</p>
                             {match?.isRunning ? (
-                                <div className="flex items-center gap-1 animate-pulse text-slate-600 px-2 py-1">
+                                <div className="flex items-center gap-1 animate-pulse text-slate-600 px-2 py-1 dark:text-white">
                                     <span className="p-1 rounded-full bg-slate-600 dark:bg-white" />
                                     <p className="text-sm">Live now</p>
                                 </div>
                             ) : (
-                                <div className="flex items-center gap-2 text-black dark:text-neutral-800">
+                                <div className="flex items-center gap-2 text-black dark:text-neutral-200">
                                     <div className="flex items-center text-sm gap-1">
-                                    <CalendarDaysIcon className="w-4 h-4" />
-                                    <p>
-                                        {match?.startsAt &&
-                                        new Date(match.startsAt).toDateString()}
-                                    </p>
+                                        <CalendarDaysIcon className="w-4 h-4 dark:text-neutral-200" />
+                                        <p>
+                                            {match?.startsAt &&
+                                            new Date(match.startsAt).toDateString()}
+                                        </p>
                                     </div>
                                     <p>to</p>
                                     <p className="text-sm">
-                                    {match?.startsAt &&
-                                        new Date(match.startsAt).toDateString()}
+                                    {match?.startsAt && new Date(match.startsAt).toDateString()}
                                     </p>
                                 </div>
                             )}
                         </div>
-                        <div className="my-2">
+                        <div className="my-2 dark:text-neutral-200">
                             <div className="flex gap-2 items-center">
                                 <p className="font-bold text-lg">Scores</p>
                                 <button onClick={searchMatch}>
@@ -131,9 +130,11 @@ const MatchDetailsModal = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-slate-300 -m-6 p-6 text-black dark:bg-black">
+                        <div className="bg-slate-300 -m-6 p-6 text-black dark:bg-black dark:text-neutral-200">
                             <p className="font-bold text-lg mb-2">Story</p>
-                            <p>{match?.story}</p>
+                            <div className="text-justify">
+                                <p>{match?.story}</p>
+                            </div>            
                         </div>
                         </Dialog.Panel>
                     </Transition.Child>
