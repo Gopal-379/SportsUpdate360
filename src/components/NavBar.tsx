@@ -9,6 +9,7 @@ import { MoonIcon, SunIcon } from "@heroicons/react/20/solid";
 const NavBar = () => {
     const { theme, setTheme } = useContext(ThemeContext);
     const [enabled, setEnabled] = useState(theme === 'dark');
+    const isAuth = !!localStorage.getItem("authToken");
 
     const userDataString = localStorage.getItem("userData");
     const userData: User = JSON.parse(userDataString ? userDataString : "{}");
@@ -64,9 +65,11 @@ const NavBar = () => {
                                         )}
                                 </span>
                             </Switch>
-                            <Link to="/preferences">
-                                <Cog6ToothIcon className="h-6 w-6 dark:text-white ml-4"/>        
-                            </Link>    
+                            {isAuth && (        
+                                <Link to="/preferences">
+                                    <Cog6ToothIcon className="h-6 w-6 dark:text-white ml-4"/>        
+                                </Link>    
+                            )}    
                             <Menu as="div" className="relative ml-3">
                             <div>
                                 <Menu.Button className="rounded-full p-1 text-black transition-colors dark:text-white">
@@ -88,7 +91,7 @@ const NavBar = () => {
                                         {userData.name}
                                     </span>
                                     <span className="text-sm text-gray-500">
-                                        {userData.email}
+                                        {userData.email ?? ""}
                                     </span>
                                 </div>
                                 <div className="text-center py-2">
