@@ -8,6 +8,7 @@ import Home from "../pages/home";
 import MatchDetailsModal from "../pages/match";
 import ArticleDetailsModel from "../pages/article";
 import Preferences from "../pages/preferences";
+import ResetPwd from "../pages/authentication/ResetPwd";
 
 const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
             {
                 path: "preferences",
                 element: <Preferences />,
+            },
+            {
+                path: "resetPwd",
+                element: <ResetPwd />,
             },
         ],
     },
