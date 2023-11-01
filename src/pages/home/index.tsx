@@ -9,7 +9,7 @@ import { searchArticles } from "../../context/articles/actions";
 import { useSportDispatch } from "../../context/sports/context";
 import { searchSports } from "../../context/sports/actions";
 import { useTeamDispatch } from "../../context/teams/context";
-import { seachTeams } from "../../context/teams/actions";
+import { searchTeams } from "../../context/teams/actions";
 import { useEffect } from "react";
 
 const Home = () => {
@@ -22,7 +22,7 @@ const Home = () => {
         searchMatches(matchDispatch);
         searchArticles(articleDispatch);
         searchSports(sportDispatch);
-        seachTeams(teamDispatch);
+        searchTeams(teamDispatch);
     }, []);
 
     return (

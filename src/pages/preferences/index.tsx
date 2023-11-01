@@ -3,40 +3,73 @@
 import { Fragment, useEffect, useState } from "react";
 import { Sport, Teams, UserPreferences } from "../../types/types";
 import { useNavigate } from "react-router-dom";
-import { useSportState } from "../../context/sports/context";
-import { useTeamState } from "../../context/teams/context";
 import { API_ENDPOINT } from "../../config/constants";
 import { Dialog, Transition } from "@headlessui/react";
 import { BookmarkIcon } from "@heroicons/react/20/solid";
+import { useMatchDispatch } from "../../context/matches/context";
+import { useArticleDispatch } from "../../context/articles/context";
+import { useSportDispatch } from "../../context/sports/context";
+import { useTeamDispatch } from "../../context/teams/context";
+import { searchMatches } from "../../context/matches/actions";
+import { searchArticles } from "../../context/articles/actions";
+import { searchSports } from "../../context/sports/actions";
+import { searchTeams } from "../../context/teams/actions";
 
 const Preferences = () => {
     const [userPreferences, setUserPreferences] = useState<UserPreferences>({
         sports: [],
         teams: [],
     });
+    const [sports, setSport] = useState<Sport[]>([]);
+    const [teams, setTeam] = useState<Teams[]>([]);
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
-    const sportState: any = useSportState();
-    const teamState: any = useTeamState();
-    const {
-        sports,
-        isError: sportError,
-        errMsg: sportErrorMessage,
-    } = sportState;
-    const {
-        team,
-        isError: teamError,
-        errMsg: teamErrorMessage,
-    } = teamState;
 
+    const matchDipatch = useMatchDispatch();
+    const articleDispatch = useArticleDispatch();
+    const sportDispatch = useSportDispatch();
+    const teamDispatch = useTeamDispatch();
+
+    const searchAllSports = async () => {
+        try {
+            const res = await fetch(`${API_ENDPOINT}/sports`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const data = await res.json();
+            setSport(data.sports);
+        } catch (err) {
+            console.log('Error Fetching Sports: ', err);
+        }
+    };
+
+    const searchAllTeams = async () => {
+        try {
+            const res = await fetch(`${API_ENDPOINT}/teams`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const data = await res.json();
+            setTeam(data);
+        } catch (err) {
+            console.log("Error fetching teams:", err);
+        }
+    }
+    
     function closeModal() {
         setIsOpen(false);
         navigate("../../");
     }
 
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("authToken") ?? "";
 
-    const changeSport = (sport: number) => {
+    const changeSport = (sport: string) => {
         if (userPreferences.sports.includes(sport)) {
             setUserPreferences((userPreferences) => {
                 return {
@@ -85,7 +118,13 @@ const Preferences = () => {
             },
         });
         const data = await res.json();
-        setUserPreferences(data.preferences);
+        setUserPreferences(
+            Object.keys(data.preferences).includes("sports") && Object.keys(data.preferences).includes("teams") ?
+                data.preferences : {
+                    sports: [],
+                    teams: [],
+                }
+        );
         setIsOpen(true);
     }
 
@@ -109,19 +148,18 @@ const Preferences = () => {
             preferences: data.preferences,
         };
         localStorage.setItem("userData", JSON.stringify(patchedUserData));
+        searchMatches(matchDipatch);
+        searchArticles(articleDispatch);
+        searchSports(sportDispatch);
+        searchTeams(teamDispatch);
         navigate('/');
     };
 
-    const findSportId = (sportName: string) => {
-        const sportID: Sport = sports.find((sport: Sport) => sport.name === sportName);
-        return sportID ? sportID.id : -1;
-    };
-
     useEffect(() => {
+        searchAllSports();
+        searchAllTeams();
         searchPreferences();
     }, []);
-
-    console.log(sports);
 
     return (
         <>
@@ -170,20 +208,14 @@ const Preferences = () => {
                                         Select your favourite sports and teams for tailored feed.
                                     </p>
                                     <div className="mt-4 bg-white -m-6 p-6 text-black">
-                                        {sportError && (
-                                            <p className="text-red-500">{sportErrorMessage}</p>
-                                        )}
-                                        {teamError && (
-                                            <p className="text-red-500">{teamErrorMessage}</p>
-                                        )}
                                         <p className="font-medium text-lg mb-1">
                                             Select your favorite sports
                                         </p>
                                         <div className="flex items-center gap-2 flex-wrap mb-3">
                                             {sports.map((sport: Sport) =>
-                                                userPreferences.sports.includes(sport.id) ? (
+                                                userPreferences.sports.includes(sport.name) ? (
                                                     <div
-                                                        onClick={() => changeSport(sport.id)}
+                                                        onClick={() => changeSport(sport.name)}
                                                         key={sport.id}
                                                         className="flex-shrink-0 cursor-pointer flex items-center gap-1 bg-sky-700 rounded-lg px-2 py-1 text-white text-sm"
                                                     >
@@ -191,7 +223,7 @@ const Preferences = () => {
                                                     </div>
                                                 ) : (
                                                     <div
-                                                        onClick={() => changeTeam(sport.id)}
+                                                        onClick={() => changeSport(sport.name)}
                                                         key={sport.id}
                                                         className="flex-shrink-0 cursor-pointer flex items-center gap-1 border border-sky-600 rounded-lg px-2 py-1 text-sky-700 text-sm"
                                                     >
@@ -204,13 +236,11 @@ const Preferences = () => {
                                             Select your favorite teams
                                         </p>
                                         <div className="flex items-center gap-2 flex-wrap mb-2">
-                                            {team
+                                            {teams
                                                 .filter(
                                                     (team: Teams) =>
                                                         userPreferences.sports.length === 0 ||
-                                                        userPreferences.sports.includes(
-                                                            findSportId(team.plays ? team.plays : "")
-                                                        )
+                                                        userPreferences.sports.includes(team.plays ? team.plays : "")
                                                 )
                                                 .map((team: Teams) =>
                                                     userPreferences.teams.includes(team.id) ? (

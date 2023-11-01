@@ -8,7 +8,6 @@ import LiveCard from "./LiveCard";
 const LiveSports = () => {
     const state: any = useMatchState();
     const { matches, isLoading, isError, errMsg } = state;
-    console.log(state);
     const matchPreview: Match[] = matches ? matches.slice(0, matches.length > 5 ? 5 : matches.length) : [];
     const totalMatches: Match[] = matches && matches.length > 5 ? matches.slice(5, matches.length - 1) : [];
 

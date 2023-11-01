@@ -21,8 +21,8 @@ const NavBar = () => {
         } else {
             newTheme = 'light'
         }
-        setEnabled(!enabled)
-        setTheme(newTheme)
+        setEnabled(!enabled);
+        setTheme(newTheme);
     }
     
     return (
@@ -69,7 +69,7 @@ const NavBar = () => {
                                 <Link to="/preferences">
                                     <Cog6ToothIcon className="h-6 w-6 dark:text-white ml-4"/>        
                                 </Link>    
-                            )}    
+                            )}
                             <Menu as="div" className="relative ml-3">
                             <div>
                                 <Menu.Button className="rounded-full p-1 text-black transition-colors dark:text-white">
@@ -91,7 +91,7 @@ const NavBar = () => {
                                         {userData.name}
                                     </span>
                                     <span className="text-sm text-gray-500">
-                                        {userData.email ?? ""}
+                                        {userData.email}
                                     </span>
                                 </div>
                                 <div className="text-center py-2">

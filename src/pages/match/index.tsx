@@ -123,7 +123,7 @@ const MatchDetailsModal = () => {
                                     </div>
                                     {match?.playingTeam === match?.teams[1].id && (
                                     <span className="bg-slate-600 rounded-full px-2 text-white py-1 text-xs py-1 flex items-center">
-                                        <span className="p-1 rounded-full bg-white mr-1"></span>                    
+                                        <span className="p-1 rounded-full bg-white mr-1"></span>                
                                         <span>Playing</span>
                                     </span>
                                     )}

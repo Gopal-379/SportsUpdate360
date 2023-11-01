@@ -29,7 +29,7 @@ const LiveNews = () => {
         errMsg: teamErrorMessage,
     } = teamState;
 
-    const [selectedSports, setSelectedSports] = useState<number[]>([]);
+    const [selectedSports, setSelectedSports] = useState<string[]>([]);
     const [selectedSportDropdown, setSelectedSportDropdown] = useState("All");
 
     const handleSportDropdownChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -37,7 +37,7 @@ const LiveNews = () => {
         if (event.target.value === "All") {
             setSelectedSports([]);
         } else {
-            setSelectedSports([parseInt(event.target.value, 10)]);
+            setSelectedSports([event.target.value]);
         }
     };
     
@@ -51,13 +51,6 @@ const LiveNews = () => {
         } else {
             setSelectedTeams((selectedTeams) => [...selectedTeams, team]);
         }
-    };
-
-    const findSportId = (sportName: string) => {
-        const sportId: Sport = sports.find(
-            (sport: Sport) => sport.name === sportName
-        );
-        return sportId ? sportId.id : -1;
     };
 
     return (
@@ -86,13 +79,13 @@ const LiveNews = () => {
                     {team
                         .filter(
                             (team: Teams) => 
-                                selectedSports.length === 0 || selectedSports.includes(findSportId(team.plays ? team.plays : ""))
+                                selectedSports.length === 0 || selectedSports.includes(team.plays ? team.plays : "")
                         )
                         .map((team: Teams) =>
                         selectedTeams.includes(team.id) ? (
                         <div
                             onClick={() => toggleTeam(team.id)}
-                            key={team.id}            
+                            key={team.id}     
                             className="flex-shrink-0 cursor-pointer flex items-center gap-1 bg-black rounded-lg px-2 py-1 text-white text-sm dark:bg-white dark:text-neutral-700 mb-3"
                         >
                             <span>{team.name}</span>
@@ -126,7 +119,7 @@ const LiveNews = () => {
                     articles
                     .filter(
                         (article: Article) => 
-                            selectedSports.length === 0 || selectedSports.includes(article.sport.id)
+                            selectedSports.length === 0 || selectedSports.includes(article.sport.name)
                     )
                     .filter(
                         (article: Article) => {

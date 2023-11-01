@@ -68,6 +68,6 @@ export type ArticleDetails = {
 }
 
 export type UserPreferences = {
-    sports: number[];
+    sports: string[];
     teams: number[];
 }
