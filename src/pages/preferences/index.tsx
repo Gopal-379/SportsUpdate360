@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, useContext } from "react";
 import { Sport, Teams, UserPreferences } from "../../types/types";
 import { useNavigate } from "react-router-dom";
 import { API_ENDPOINT } from "../../config/constants";
@@ -14,8 +14,10 @@ import { searchMatches } from "../../context/matches/actions";
 import { searchArticles } from "../../context/articles/actions";
 import { searchSports } from "../../context/sports/actions";
 import { searchTeams } from "../../context/teams/actions";
+import { ThemeContext } from "../../context/theme";
 
 const Preferences = () => {
+    const { theme } = useContext(ThemeContext); 
     const [userPreferences, setUserPreferences] = useState<UserPreferences>({
         sports: [],
         teams: [],
@@ -177,7 +179,7 @@ const Preferences = () => {
                         <div className="fixed inset-0 bg-black bg-opacity-25" />
                     </Transition.Child>
 
-                    <div className="fixed inset-0 overflow-y-auto">
+                    <div className={`fixed inset-0 overflow-y-auto ${theme === "dark" && "dark"}`}>
                         <div className="flex min-h-full items-center justify-center p-4 text-center">
                             <Transition.Child
                                 as={Fragment}
@@ -188,17 +190,17 @@ const Preferences = () => {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-slate-300 text-white p-6 text-left align-middle shadow-xl transition-all">
+                                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-slate-300 text-white p-6 text-left align-middle shadow-xl transition-all dark:bg-black dark:text-neutral-100 dark:border dark:border-white">
                                     <div className="flex justify-between items-center">
                                         <Dialog.Title
                                             as="h3"
-                                            className="text-2xl font-bold leading-6 text-black mb-2"
+                                            className="text-2xl font-bold leading-6 text-black mb-2 dark:text-white"
                                         >
                                             Preferences
                                         </Dialog.Title>
                                         <button
                                             onClick={patchPreferences}
-                                            className="bg-white rounded-md px-2 py-1 text-black flex items-center gap-1"
+                                            className="bg-white rounded-md px-2 py-1 text-black flex items-center gap-1 dark:bg-black dark:text-neutral-100"
                                         >
                                             <FunnelIcon className="h-4 w-4" />
                                             <span className="font-semibold">Apply</span>
@@ -207,7 +209,7 @@ const Preferences = () => {
                                     <p className="mb-4 text-sm">
                                         Select your favourite sports and teams.
                                     </p>
-                                    <div className="mt-4 bg-white -m-6 p-6 text-black">
+                                    <div className="mt-4 bg-slate-300 -m-6 p-6 text-black dark:bg-black dark:text-white">
                                         <p className="font-medium text-lg mb-1">
                                             Select your favorite sports
                                         </p>

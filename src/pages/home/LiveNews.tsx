@@ -122,58 +122,66 @@ const LiveNews = () => {
                     />
                 ))}
                 {articles &&
-                    articles
-                    .filter(
-                        (article: Article) => 
-                            selectedSports.length === 0 || selectedSports.includes(article.sport.name)
-                    )
-                    .filter(
-                        (article: Article) => {
-                            let flag = false;
-                            for (let t of article.teams) {
-                                if (selectedTeams.includes(t.id)) {
-                                    flag = true;
-                                    break;
+                (() => {
+                    const articleData = articles
+                        .filter(
+                            (article: Article) =>
+                                selectedSports.length === 0 || selectedSports.includes(article.sport.name)
+                        )
+                        .filter(
+                            (article: Article) => {
+                                let flag = false;
+                                for (let t of article.teams) {
+                                    if (selectedTeams.includes(t.id)) {
+                                        flag = true;
+                                        break;
+                                    }
                                 }
+                                return selectedTeams.length === 0 || flag;
                             }
-                            return selectedTeams.length === 0 || flag;
-                        }
-                    )
-                    .map((article: Article) => (
-                    <Link
-                        to={`/article/${article.id}`}
-                        key={article.id}
-                        className="flex rounded-lg bg-white dark:bg-black border border-gray-200 shadow-md hover:shadow-xl transition-shadow"
-                    >
-                        <img
-                        className="w-32 rounded-l-lg object-cover h-auto"
-                        src={article.thumbnail}
-                        alt="thumbnail"
-                        />
-                        <div className="flex flex-col justify-start p-6">
-                            <p className="text-xs text-neutral-500 dark:text-neutral-300">
-                                {article.sport.name}
-                            </p>
-                            <h5 className="mt-2 text-xl font-semibold text-neutral-800 dark:text-white">
-                                {article.title}
-                            </h5>
-                            <p className="mb-4 text-sm text-neutral-600 dark:text-neutral-300">
-                                {article.summary}
-                            </p>
-                            <div className="text-xs text-neutral-500 mb-1 dark:text-neutral-300">
-                                {article.teams.map((team, id) => (
-                                <span key={id}>
-                                    <span>{team.name}</span>
-                                    {article.teams.length !== id + 1 && " VS "}
-                                </span>
-                                ))}
-                            </div>
-                            <p className="text-xs text-neutral-500 dark:text-neutral-300">
-                                {new Date(article.date).toDateString()}
-                            </p>
+                        );
+                    return articleData.length > 0 ? (
+                        articleData.map((article: Article) => (
+                            <Link
+                                to={`/article/${article.id}`}
+                                key={article.id}
+                                className="flex rounded-lg bg-white dark:bg-black border border-gray-200 shadow-md hover:shadow-xl transition-shadow"
+                            >
+                                <img
+                                    className="w-32 rounded-l-lg object-cover h-auto"
+                                    src={article.thumbnail}
+                                    alt="thumbnail"
+                                />
+                                <div className="flex flex-col justify-start p-6">
+                                    <p className="text-xs text-neutral-500 dark:text-neutral-300">
+                                        {article.sport.name}
+                                    </p>
+                                    <h5 className="mt-2 text-xl font-semibold text-neutral-800 dark:text-white">
+                                        {article.title}
+                                    </h5>
+                                    <p className="mb-4 text-sm text-neutral-600 dark:text-neutral-300">
+                                        {article.summary}
+                                    </p>
+                                    <div className="text-xs text-neutral-500 mb-1 dark:text-neutral-300">
+                                        {article.teams.map((team, id) => (
+                                            <span key={id}>
+                                                <span>{team.name}</span>
+                                                {article.teams.length !== id + 1 && " VS "}
+                                            </span>
+                                        ))}
+                                    </div>
+                                    <p className="text-xs text-neutral-500 dark:text-neutral-300">
+                                        {new Date(article.date).toDateString()}
+                                    </p>
+                                </div>
+                            </Link>
+                        ))
+                    ) : (
+                        <div className="text-center mt-4 text-xl text-green-800">
+                            <p>There are currently no updates available at the moment</p>
                         </div>
-                    </Link>
-                ))}
+                    );
+                })()}
             </div>
         </div>
     );

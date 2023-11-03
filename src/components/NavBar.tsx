@@ -86,16 +86,16 @@ const NavBar = () => {
                                 leaveTo="transform opacity-0 scale-95"
                             >
                                 <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none p-2">
+                                <div className="flex flex-col items-center justify-center my-2">
+                                    <span className="text-xl font-semibold text-black">
+                                        {userData.name}
+                                    </span>
+                                    <span className="text-sm text-gray-500">
+                                        {userData.email}
+                                    </span>
+                                </div>             
                                 {isAuth ? (
-                                    <>
-                                        <div className="flex flex-col items-center justify-center my-2">
-                                            <span className="text-xl font-semibold text-black">
-                                                {userData.name}
-                                            </span>
-                                            <span className="text-sm text-gray-500">
-                                                {userData.email}
-                                            </span>
-                                        </div>        
+                                    <>       
                                         <div className="text-center py-2">
                                             <Link
                                             to="/auth/signout"
