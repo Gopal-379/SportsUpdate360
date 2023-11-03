@@ -82,7 +82,7 @@ const ResetPwd = () => {
                                         as="h3"
                                         className="text-3xl font-bold leading-6 text-white mb-2"
                                     >
-                                        Reset your account password
+                                        Reset your password
                                     </Dialog.Title>
                                     <p className="mb-4 text-sm">Enter your credentials.</p>
                                     <div className="mt-4 bg-white -m-6 p-6 text-black">
