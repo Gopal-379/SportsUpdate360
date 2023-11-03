@@ -3,7 +3,7 @@ import { API_ENDPOINT } from "../../config/constants";
 import { Sport } from "../../types/types";
 
 export const searchSports = async (dispatch: any) => {
-    const userSports: string[] = JSON.parse(localStorage.getItem("userData") ?? JSON.stringify({ "prefernces": {} })).preferences.sports ?? [];
+    const userSports: string[] = JSON.parse(localStorage.getItem("userData") ?? JSON.stringify({ "preferences": {} })).preferences.sports ?? [];
     try {
         dispatch({ type: "FETCH_SPORT_REQUEST" });
         const res = await fetch(`${API_ENDPOINT}/sports`, {
