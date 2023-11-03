@@ -241,8 +241,7 @@ const Preferences = () => {
                                             {teams
                                                 .filter(
                                                     (team: Teams) =>
-                                                        userPreferences.sports.length === 0 ||
-                                                        userPreferences.sports.includes(team.plays ? team.plays : "")
+                                                        userPreferences.sports.length === 0 || userPreferences.sports.includes(team.plays ? team.plays : "") || userPreferences.teams.includes(team.id)
                                                 )
                                                 .map((team: Teams) =>
                                                     userPreferences.teams.includes(team.id) ? (

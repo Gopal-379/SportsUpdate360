@@ -13,7 +13,7 @@ const LiveSports = () => {
 
     return (
         <div className="scroll-bar">
-            <p className="font-bold text-2xl mb-2 text-black dark:text-white px-2">Live Sports</p>
+            <p className="font-bold text-2xl mb-4 text-black dark:text-white px-2">Live Sports</p>
             {isError && <p className="text-red-500">{errMsg}</p>}
             <div className="flex overflow-x-auto gap-2 pb-1 rounded-l-md px-2">
                 {isLoading &&

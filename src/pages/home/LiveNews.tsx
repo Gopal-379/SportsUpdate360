@@ -63,7 +63,7 @@ const LiveNews = () => {
         <div>
             <p className="px-2 font-bold text-2xl mb-3">Live News</p>
             <div className="mb-4">
-                <p className="text-md font-semibold mb-1 px-2">Filter by sport:</p>
+                <p className="text-md font-semibold mb-2 px-2">Filter by sport:</p>
                 <div className="flex items-center space-x-2 mb-3 px-2">
                     <select
                         className="px-4 py-2 border rounded-md bg-white text-gray-800 focus:outline-none focus:ring focus:border-blue-300 dark:text-white dark:bg-black"
@@ -80,12 +80,12 @@ const LiveNews = () => {
                 </div>
             </div>
             <div className="mb-4 scroll-bar">
-                <p className="text-md font-semibold mb-1 px-2">Filter by team:</p>
+                <p className="text-md font-semibold mb-2 px-2">Filter by team:</p>
                 <div className="flex gap-2 items-center mb-3 overflow-x-auto px-2">
                     {team
                         .filter(
                             (team: Teams) => 
-                                selectedSports.length === 0 || selectedSports.includes(team.plays ? team.plays : "")
+                                selectedSports.length === 0 || selectedSports.includes(team.plays ? team.plays : "") || selectedTeams.includes(team.id)
                         )
                         .map((team: Teams) =>
                         selectedTeams.includes(team.id) ? (
