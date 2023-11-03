@@ -33,17 +33,23 @@ const LiveNews = () => {
     const [selectedSportDropdown, setSelectedSportDropdown] = useState("All");
 
     const handleSportDropdownChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedSportDropdown(event.target.value);
-        if (event.target.value === "All") {
+        const selectedSportName = event.target.value;
+        setSelectedSportDropdown(selectedSportName);
+        if (selectedSportName === "All") {
             setSelectedSports([]);
         } else {
-            setSelectedSports([event.target.value]);
+            const selectedSportIds = sports
+                .filter((sport: Sport) => sport.name === selectedSportName)
+                .map((sport: Sport) => sport.name);
+            setSelectedSports(selectedSportIds);
         }
     };
+
+    console.log(selectedSports);
     
     const [selectedTeams, setSelectedTeams] = useState<number[]>([]);
 
-    const toggleTeam = (team: number) => {
+    const changeTeam = (team: number) => {
         if (selectedTeams.includes(team)) {
             setSelectedTeams((selectedTeams) =>
             selectedTeams.filter((selectedTeams) => selectedTeams !== team)
@@ -66,7 +72,7 @@ const LiveNews = () => {
                     >
                         <option value="All">All Sports</option>
                         {sports.map((sport: Sport) => (
-                            <option key={sport.id} value={sport.id}>
+                            <option key={sport.id} value={sport.name}>
                                 {sport.name}
                             </option>
                         ))}
@@ -84,7 +90,7 @@ const LiveNews = () => {
                         .map((team: Teams) =>
                         selectedTeams.includes(team.id) ? (
                         <div
-                            onClick={() => toggleTeam(team.id)}
+                            onClick={() => changeTeam(team.id)}
                             key={team.id}     
                             className="flex-shrink-0 cursor-pointer flex items-center gap-1 bg-black rounded-lg px-2 py-1 text-white text-sm dark:bg-white dark:text-neutral-700 mb-3"
                         >
@@ -92,7 +98,7 @@ const LiveNews = () => {
                         </div>
                         ) : (
                             <div
-                                onClick={() => toggleTeam(team.id)}
+                                onClick={() => changeTeam(team.id)}
                                 key={team.id}                
                                 className="flex-shrink-0 cursor-pointer flex items-center gap-1 border border-black rounded-lg px-2 py-1 text-neutral-700 text-sm dark:text-white dark:border-white mb-3"
                             >

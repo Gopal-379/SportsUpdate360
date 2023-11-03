@@ -38,8 +38,8 @@ const LiveSports = () => {
                             <p className="text-sm">{match.sportName}</p>
                             {match.isRunning ? (
                                 <div className="flex items-center gap-1">
-                                    <span className="p-1 rounded-full bg-sky-700 animate-pulse" />
-                                    <p className="text-sky-700 text-sm">Live Now</p>
+                                    <span className="p-1 rounded-full bg-green-700 animate-pulse" />
+                                    <p className="text-green-700 text-sm">Live Now</p>
                                 </div>
                             ) : (
                                 <div className="flex items-center text-sm text-gray-500 gap-1">

@@ -5,8 +5,8 @@ import { Article } from "../../types/types";
 
 export const searchArticles = async (dispatch: any) => {
     const token = localStorage.getItem("authToken") ?? "";
-    const userSports: string[] = JSON.parse(localStorage.getItem("userData") ?? "").preferences.sports ?? [];
-    const userTeams: number[] = JSON.parse(localStorage.getItem("userData") ?? "").preferences.teams ?? [];
+    const userSports: string[] = JSON.parse(localStorage.getItem("userData") ?? JSON.stringify({"preferences":{}})).preferences.sports ?? [];
+    const userTeams: number[] = JSON.parse(localStorage.getItem("userData") ?? JSON.stringify({"preferences":{}})).preferences.teams ?? [];
     try {
         dispatch({ type: "FETCH_ARTICLE_REQUEST" });
         const res = await fetch(`${API_ENDPOINT}/articles`, {

@@ -4,8 +4,8 @@ import { Teams } from "../../types/types";
 
 export const searchTeams = async (dispatch: any) => {
     const token = localStorage.getItem("authToken") ?? "";
-    const userSports: string[] = JSON.parse(localStorage.getItem("userData") ?? "").preferences.sports ?? [];
-    const userTeams: number[] = JSON.parse(localStorage.getItem("userData") ?? "").preferences.teams ?? [];
+    const userSports: string[] = JSON.parse(localStorage.getItem("userData") ?? JSON.stringify({"preferences":{}})).preferences.sports ?? [];
+    const userTeams: number[] = JSON.parse(localStorage.getItem("userData") ?? JSON.stringify({"preferences":{}})).preferences.teams ?? [];
     try {
         dispatch({ type: "FETCH_TEAM_REQUEST" });
         const res = await fetch(`${API_ENDPOINT}/teams`, {

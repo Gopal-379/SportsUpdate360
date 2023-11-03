@@ -11,8 +11,8 @@ const NavBar = () => {
     const [enabled, setEnabled] = useState(theme === 'dark');
     const isAuth = !!localStorage.getItem("authToken");
 
-    const userDataString = localStorage.getItem("userData");
-    const userData: User = JSON.parse(userDataString ? userDataString : "{}");
+    const userStr = localStorage.getItem("userData");
+    const userData: User = JSON.parse(userStr ? userStr : "{}");
 
     const toggleTheme = () => {
         let newTheme = ''
@@ -85,23 +85,54 @@ const NavBar = () => {
                                 leaveFrom="transform opacity-100 scale-100"
                                 leaveTo="transform opacity-0 scale-95"
                             >
-                                <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none p-2 divide-y">
-                                <div className="flex flex-col items-center justify-center my-2">
-                                    <span className="text-xl font-semibold text-black">
-                                        {userData.name}
-                                    </span>
-                                    <span className="text-sm text-gray-500">
-                                        {userData.email}
-                                    </span>
-                                </div>
-                                <div className="text-center py-2">
-                                    <Link
-                                    to="/auth/signout"
-                                    className="text-black hover:text-red-500 transition-colors"
-                                    >
-                                    Sign out
-                                    </Link>
-                                </div>
+                                <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none p-2">
+                                {isAuth ? (
+                                    <>
+                                        <div className="flex flex-col items-center justify-center my-2">
+                                            <span className="text-xl font-semibold text-black">
+                                                {userData.name}
+                                            </span>
+                                            <span className="text-sm text-gray-500">
+                                                {userData.email}
+                                            </span>
+                                        </div>        
+                                        <div className="text-center py-2">
+                                            <Link
+                                            to="/auth/signout"
+                                            className="text-black hover:text-red-500 transition-colors"
+                                            >
+                                            Sign out
+                                            </Link>
+                                        </div>
+                                        <div className="text-center py-2">
+                                            <Link
+                                            to="/resetPwd"
+                                            className="text-black hover:text-red-500 transition-colors"
+                                            >
+                                            Reset Password
+                                            </Link>
+                                        </div>
+                                    </>      
+                                ) : (
+                                    <>            
+                                        <div className="text-center py-2">
+                                            <Link
+                                                to="/auth/signin"
+                                                className="text-black hover:text-slate-600 transition-colors"
+                                            >
+                                                Sign in
+                                            </Link>
+                                        </div>
+                                        <div className="text-center py-2">
+                                            <Link
+                                                to="/auth/signup"
+                                                className="text-black hover:text-slate-600 transition-colors"
+                                            >
+                                                Sign up
+                                            </Link>
+                                        </div> 
+                                    </>                
+                                )}
                                 </Menu.Items>
                             </Transition>
                             </Menu>

@@ -4,7 +4,7 @@ import { Sport } from "../../types/types";
 
 export const searchSports = async (dispatch: any) => {
     const token = localStorage.getItem("authToken") ?? "";
-    const userSports: string[] = JSON.parse(localStorage.getItem("userData") ?? "").preferences.sports ?? [];
+    const userSports: string[] = JSON.parse(localStorage.getItem("userData") ?? JSON.stringify({"prefernces":{}})).preferences.sports ?? [];
     try {
         dispatch({ type: "FETCH_SPORT_REQUEST" });
         const res = await fetch(`${API_ENDPOINT}/sports`, {
@@ -16,7 +16,7 @@ export const searchSports = async (dispatch: any) => {
         });
 
         const data = await res.json();
-        const filterBySports = data.sports.filter((sport: Sport) => userSports.length===0||userSports.includes(sport.name));
+        const filterBySports = data.sports.filter((sport: Sport) => userSports.length === 0 || userSports.includes(sport.name));
         dispatch({ type: "FETCH_SPORT_SUCCESS", payload: filterBySports });
     } catch (err) {
         console.log("Error fetching sports", err);

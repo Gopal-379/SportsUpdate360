@@ -5,7 +5,7 @@ import { Sport, Teams, UserPreferences } from "../../types/types";
 import { useNavigate } from "react-router-dom";
 import { API_ENDPOINT } from "../../config/constants";
 import { Dialog, Transition } from "@headlessui/react";
-import { BookmarkIcon } from "@heroicons/react/20/solid";
+import { FunnelIcon } from "@heroicons/react/20/solid";
 import { useMatchDispatch } from "../../context/matches/context";
 import { useArticleDispatch } from "../../context/articles/context";
 import { useSportDispatch } from "../../context/sports/context";
@@ -188,24 +188,24 @@ const Preferences = () => {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-sky-700 text-white p-6 text-left align-middle shadow-xl transition-all">
+                                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-slate-300 text-white p-6 text-left align-middle shadow-xl transition-all">
                                     <div className="flex justify-between items-center">
                                         <Dialog.Title
                                             as="h3"
-                                            className="text-2xl font-bold leading-6 text-white mb-2"
+                                            className="text-2xl font-bold leading-6 text-black mb-2"
                                         >
                                             Preferences
                                         </Dialog.Title>
                                         <button
                                             onClick={patchPreferences}
-                                            className="bg-white rounded-md px-2 py-1 text-sky-700 flex items-center gap-1"
+                                            className="bg-white rounded-md px-2 py-1 text-black flex items-center gap-1"
                                         >
-                                            <BookmarkIcon className="h-4 w-4" />
-                                            <span className="font-semibold">Save</span>
+                                            <FunnelIcon className="h-4 w-4" />
+                                            <span className="font-semibold">Apply</span>
                                         </button>
                                     </div>
                                     <p className="mb-4 text-sm">
-                                        Select your favourite sports and teams for tailored feed.
+                                        Select your favourite sports and teams.
                                     </p>
                                     <div className="mt-4 bg-white -m-6 p-6 text-black">
                                         <p className="font-medium text-lg mb-1">
@@ -217,7 +217,7 @@ const Preferences = () => {
                                                     <div
                                                         onClick={() => changeSport(sport.name)}
                                                         key={sport.id}
-                                                        className="flex-shrink-0 cursor-pointer flex items-center gap-1 bg-sky-700 rounded-lg px-2 py-1 text-white text-sm"
+                                                        className="flex-shrink-0 cursor-pointer flex items-center gap-1 bg-black rounded-lg px-2 py-1 text-white text-sm dark:bg-white dark:text-neutral-700 mb-3"
                                                     >
                                                         <span>{sport.name}</span>
                                                     </div>
@@ -225,7 +225,7 @@ const Preferences = () => {
                                                     <div
                                                         onClick={() => changeSport(sport.name)}
                                                         key={sport.id}
-                                                        className="flex-shrink-0 cursor-pointer flex items-center gap-1 border border-sky-600 rounded-lg px-2 py-1 text-sky-700 text-sm"
+                                                        className="flex-shrink-0 cursor-pointer flex items-center gap-1 border border-black rounded-lg px-2 py-1 text-neutral-700 text-sm dark:text-white dark:border-white mb-3"
                                                     >
                                                         <span>{sport.name}</span>
                                                     </div>
@@ -247,7 +247,7 @@ const Preferences = () => {
                                                         <div
                                                             onClick={() => changeTeam(team.id)}
                                                             key={team.id}
-                                                            className="flex-shrink-0 cursor-pointer flex items-center gap-1 bg-sky-700 rounded-lg px-2 py-1 text-white text-sm"
+                                                            className="flex-shrink-0 cursor-pointer flex items-center gap-1 bg-black rounded-lg px-2 py-1 text-white text-sm dark:bg-white dark:text-neutral-700 mb-3"
                                                         >
                                                             <span>{team.name}</span>
                                                         </div>
@@ -255,7 +255,7 @@ const Preferences = () => {
                                                         <div
                                                             onClick={() => changeTeam(team.id)}
                                                             key={team.id}
-                                                            className="flex-shrink-0 cursor-pointer flex items-center gap-1 border border-sky-600 rounded-lg px-2 py-1 text-sky-700 text-sm"
+                                                            className="flex-shrink-0 cursor-pointer flex items-center gap-1 border border-black rounded-lg px-2 py-1 text-neutral-700 text-sm dark:text-white dark:border-white mb-3"
                                                         >
                                                             <span>{team.name}</span>
                                                         </div>
