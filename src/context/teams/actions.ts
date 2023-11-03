@@ -3,7 +3,6 @@ import { API_ENDPOINT } from "../../config/constants";
 import { Teams } from "../../types/types";
 
 export const searchTeams = async (dispatch: any) => {
-    const token = localStorage.getItem("authToken") ?? "";
     const userSports: string[] = JSON.parse(localStorage.getItem("userData") ?? JSON.stringify({"preferences":{}})).preferences.sports ?? [];
     const userTeams: number[] = JSON.parse(localStorage.getItem("userData") ?? JSON.stringify({"preferences":{}})).preferences.teams ?? [];
     try {
@@ -12,7 +11,6 @@ export const searchTeams = async (dispatch: any) => {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
             },
         });
 

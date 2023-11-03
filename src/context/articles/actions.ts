@@ -4,7 +4,6 @@ import { API_ENDPOINT } from "../../config/constants";
 import { Article } from "../../types/types";
 
 export const searchArticles = async (dispatch: any) => {
-    const token = localStorage.getItem("authToken") ?? "";
     const userSports: string[] = JSON.parse(localStorage.getItem("userData") ?? JSON.stringify({"preferences":{}})).preferences.sports ?? [];
     const userTeams: number[] = JSON.parse(localStorage.getItem("userData") ?? JSON.stringify({"preferences":{}})).preferences.teams ?? [];
     try {
@@ -13,7 +12,6 @@ export const searchArticles = async (dispatch: any) => {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
             },
         });
         const data = await res.json();
