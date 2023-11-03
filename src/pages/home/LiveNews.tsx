@@ -44,8 +44,6 @@ const LiveNews = () => {
             setSelectedSports(selectedSportIds);
         }
     };
-
-    console.log(selectedSports);
     
     const [selectedTeams, setSelectedTeams] = useState<number[]>([]);
 
@@ -177,7 +175,7 @@ const LiveNews = () => {
                             </Link>
                         ))
                     ) : (
-                        <div className="text-center mt-4 text-xl text-green-800">
+                        <div className="text-center mt-4 text-xl text-green-800 dark:text-neutral-300">
                             <p>There are currently no updates available at the moment</p>
                         </div>
                     );

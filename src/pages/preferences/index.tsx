@@ -26,7 +26,7 @@ const Preferences = () => {
     const [teams, setTeam] = useState<Teams[]>([]);
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
-
+    const token = localStorage.getItem("authToken") ?? "";
     const matchDipatch = useMatchDispatch();
     const articleDispatch = useArticleDispatch();
     const sportDispatch = useSportDispatch();
@@ -68,8 +68,6 @@ const Preferences = () => {
         setIsOpen(false);
         navigate("../../");
     }
-
-    const token = localStorage.getItem("authToken") ?? "";
 
     const changeSport = (sport: string) => {
         if (userPreferences.sports.includes(sport)) {
@@ -144,7 +142,7 @@ const Preferences = () => {
         const data = await res.json();
         const userData = localStorage.getItem("userData") ?? "";
         const JSONdata = JSON.parse(userData);
-
+        console.log(data);
         const patchedUserData = {
             ...JSONdata,
             preferences: data.preferences,
@@ -206,10 +204,10 @@ const Preferences = () => {
                                             <span className="font-semibold">Apply</span>
                                         </button>
                                     </div>
-                                    <p className="mb-4 text-sm">
+                                    <p className="mb-4 text-sm text-black">
                                         Select your favourite sports and teams.
                                     </p>
-                                    <div className="mt-4 bg-slate-300 -m-6 p-6 text-black dark:bg-black dark:text-white">
+                                    <div className="bg-slate-300 -m-6 p-6 text-black dark:bg-black dark:text-white">
                                         <p className="font-medium text-lg mb-1">
                                             Select your favorite sports
                                         </p>
