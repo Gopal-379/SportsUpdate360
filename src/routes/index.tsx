@@ -12,6 +12,28 @@ import ResetPwd from "../pages/authentication/ResetPwd";
 
 const router = createBrowserRouter([
     {
+        path: "auth",
+        element: <SignPage />,
+        children: [
+            {
+                index: true,
+                element: <Navigate to='/auth/signup' replace />,
+            },
+            {
+                path: "signin",
+                element: <SigninForm />,
+            },
+            {
+                path: "signup",
+                element: <SignupForm />,
+            },
+            {
+                path: "signout",
+                element: <Signout />,
+            },
+        ],
+    },
+    {
         path: "/",
         element: <Home />,
         children: [
@@ -60,28 +82,6 @@ const router = createBrowserRouter([
                         <ResetPwd />
                     </ProtectedRoute>
                 ),
-            },
-        ],
-    },
-    {
-        path: "auth",
-        element: <SignPage />,
-        children: [
-            {
-                index: true,
-                element: <Navigate to='/auth/signup' replace />,
-            },
-            {
-                path: "signin",
-                element: <SigninForm />,
-            },
-            {
-                path: "signup",
-                element: <SignupForm />,
-            },
-            {
-                path: "signout",
-                element: <Signout />,
             },
         ],
     },

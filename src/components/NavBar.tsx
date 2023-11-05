@@ -3,7 +3,7 @@ import { ThemeContext } from "../context/theme"
 import { Fragment, useContext, useState } from "react";
 import { Disclosure, Menu, Switch, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
-import { Cog6ToothIcon, UserCircleIcon } from "@heroicons/react/24/outline";
+import { FunnelIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import { MoonIcon, SunIcon } from "@heroicons/react/20/solid";
 
 const NavBar = () => {
@@ -67,8 +67,8 @@ const NavBar = () => {
                             </Switch>
                             {isAuth && (        
                                 <Link to="/preferences">
-                                    <Cog6ToothIcon className="h-6 w-6 dark:text-white ml-4"/>        
-                                </Link>    
+                                    <FunnelIcon className="h-6 w-6 dark:text-white ml-4"/>        
+                                </Link>
                             )}
                             <Menu as="div" className="relative ml-3">
                             <div>
@@ -107,7 +107,7 @@ const NavBar = () => {
                                         <div className="text-center py-2">
                                             <Link
                                             to="/resetPwd"
-                                            className="text-black hover:text-red-500 transition-colors"
+                                            className="text-black hover:text-slate-600 transition-colors"
                                             >
                                             Reset Password
                                             </Link>

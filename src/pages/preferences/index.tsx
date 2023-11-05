@@ -142,7 +142,7 @@ const Preferences = () => {
         const data = await res.json();
         const userData = localStorage.getItem("userData") ?? "";
         const JSONdata = JSON.parse(userData);
-        console.log(data);
+
         const patchedUserData = {
             ...JSONdata,
             preferences: data.preferences,
@@ -198,7 +198,7 @@ const Preferences = () => {
                                         </Dialog.Title>
                                         <button
                                             onClick={patchPreferences}
-                                            className="bg-white rounded-md px-2 py-1 text-black flex items-center gap-1 dark:bg-black dark:text-neutral-100"
+                                            className="rounded-md px-2 py-1 text-black border border-black flex items-center gap-1 dark:bg-black dark:text-neutral-100 dark:border dark:border-white select-none"
                                         >
                                             <FunnelIcon className="h-4 w-4" />
                                             <span className="font-semibold">Apply</span>
