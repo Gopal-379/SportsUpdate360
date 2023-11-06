@@ -29,9 +29,6 @@ To set up and run the _SportsUpdate360_  application on your local machine, foll
    ```bash
    npm install
    ```
-
-<div align="right"><a href="#table-of-contents">Back to top  ↑</a></div>
-
 ## Usage
 
 1. Start the development server. 🚀
@@ -40,23 +37,13 @@ To set up and run the _SportsUpdate360_  application on your local machine, foll
    ```
 2. Open your browser and go to ``http://localhost:5173`` to access the application. 🌐
 
-<div align="right"><a href="#table-of-contents">Back to top  ↑</a></div>
-
 ## Screenshots
-
-![Screenshot 1](D:\GOPAL\Pictures\d1.png)
-
-![Screenshot 2](D:\GOPAL\Pictures\d2.png)
-
-![Screenshot 3](D:\GOPAL\Pictures\d3.png)
-
-![Screenshot 4](D:\GOPAL\Pictures\d4.png)
-
-![Screenshot 5](D:\GOPAL\Pictures\d5.png)
-
-![Screenshot 6](D:\GOPAL\Pictures\d6.png)
-
-<div align="right"><a href="#table-of-contents">Back to top  ↑</a></div>
+![d1](https://github.com/Gopal-379/SportsUpdate360/assets/83073228/6f5b61d3-2f6f-4b79-a30f-584713106961)
+![d2](https://github.com/Gopal-379/SportsUpdate360/assets/83073228/ed18e745-a78f-4714-a718-b1704ee0d08c)
+![d3](https://github.com/Gopal-379/SportsUpdate360/assets/83073228/ce8a9235-419d-4fba-aecd-d30f8ce1a324)
+![d4](https://github.com/Gopal-379/SportsUpdate360/assets/83073228/2cfe6d6b-9342-4845-8ac6-e175f6fe4da3)
+![d5](https://github.com/Gopal-379/SportsUpdate360/assets/83073228/2f4317ab-e978-4da2-85e8-c9bf6214cfcf)
+![d6](https://github.com/Gopal-379/SportsUpdate360/assets/83073228/6851b634-8bdb-408a-9cd0-9105921a63f5)
 
 Stay updated with the latest sports news and live scores while customizing your dashboard to match your favorites. Get started with the SportsUpdate360 now! 🏀🏈⚽🎾
 
